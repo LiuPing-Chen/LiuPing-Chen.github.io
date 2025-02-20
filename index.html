@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什麼呢?</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        #wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 50px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #ff5722;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        #wheel {
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(
+                #ffeb3b 0deg 30deg, #ff9800 30deg 60deg, #ff5722 60deg 90deg, 
+                #e91e63 90deg 120deg, #9c27b0 120deg 150deg, #3f51b5 150deg 180deg, 
+                #03a9f4 180deg 210deg, #009688 210deg 240deg, #4caf50 240deg 270deg, 
+                #8bc34a 270deg 300deg, #cddc39 300deg 330deg, #ffeb3b 330deg 360deg
+            );
+            border-radius: 50%;
+            transition: transform 4s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+        }
+        #spin-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>今天吃什麼呢?</h1>
+    <div id="wheel-container">
+        <div id="wheel"></div>
+    </div>
+    <button id="spin-btn">轉動轉盤</button>
+    <p id="result"></p>
+
+    <script>
+        const foodOptions = [
+            "牛肉麵", "滷肉飯", "珍珠奶茶", "壽司", "生魚片", "炒飯", "炒麵", "雞排", "滷味", "鹽酥雞",
+            "擔仔麵", "排骨飯", "燒酒雞", "刈包", "鹹酥雞", "蚵仔煎", "米粉湯", "大腸包小腸", "豆花", "蚵仔煎",
+            "火鍋", "燒肉", "便當", "鍋燒意麵", "鍋貼", "水餃", "雞絲飯", "咖哩飯", "炸醬麵", "海鮮粥",
+            "牛排", "炒米粉", "豆腐鍋", "三明治", "炒河粉", "麻辣燙", "肉圓", "炸蝦天婦羅", "肉燥飯", "粽子",
+            "漢堡", "熱狗", "炸雞", "粥", "義大利麵", "焗飯", "沙拉", "燉飯", "魚丸湯", "燒賣",
+            "牛丼", "雞丼", "豬排飯", "拉麵", "擔擔麵", "貢丸湯", "關東煮", "燉牛肉", "素食便當", "沙茶火鍋"
+        ];
+        
+        document.getElementById("spin-btn").addEventListener("click", function() {
+            let randomDegree = 3600 + Math.floor(Math.random() * 360);
+            document.getElementById("wheel").style.transform = `rotate(${randomDegree}deg)`;
+            
+            setTimeout(() => {
+                let selectedIndex = Math.floor(Math.random() * foodOptions.length);
+                document.getElementById("result").innerText = "推薦主食: " + foodOptions[selectedIndex];
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
